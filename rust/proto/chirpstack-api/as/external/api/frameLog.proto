@@ -2,14 +2,12 @@ syntax = "proto3";
 
 package api;
 
-option go_package = "github.com/brocaar/chirpstack-api/go/v3/as/external/api";
+option go_package = "github.com/SAP529/chirpstack-api/go/v3/as/external/api";
 option java_package = "io.chirpstack.api.as.external.api";
 option java_multiple_files = true;
 option java_outer_classname = "FrameLogProto";
 
 import "google/protobuf/timestamp.proto";
-import "google/protobuf/duration.proto";
-import "common/common.proto";
 import "gw/gw.proto";
 
 

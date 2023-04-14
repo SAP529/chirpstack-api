@@ -1,6 +1,6 @@
 # ChirpStack API
 
-![Tests](https://github.com/brocaar/chirpstack-api/actions/workflows/main.yml/badge.svg?branch=master)
+![Tests](https://github.com/SAP529/chirpstack-api/actions/workflows/main.yml/badge.svg?branch=master)
 
 This repository contains the [Protobuf](https://developers.google.com/protocol-buffers/)
 and [gRPC](https://grpc.io/) API definitions for the [ChirpStack](https://www.chirpstack.io)
@@ -25,10 +25,10 @@ protobuf             - Protobuf and gRPC source files
 
 ### Go
 
-Documentation: https://godoc.org/github.com/brocaar/chirpstack-api/go
+Documentation: https://godoc.org/github.com/SAP529/chirpstack-api/go
 
 ```bash
-go get github.com/brocaar/chirpstack-api/go/v3
+go get github.com/SAP529/chirpstack-api/go/v3
 ```
 
 ### JavaScript / Typescript
@@ -45,7 +45,7 @@ See: https://crates.io/crates/chirpstack_api.
 
 ### Java
 
-See the README in /java subfolder: https://github.com/brocaar/chirpstack-api/tree/master/java.
+See the README in /java subfolder: https://github.com/SAP529/chirpstack-api/tree/master/java.
 
 ## Generating client libraries
 
