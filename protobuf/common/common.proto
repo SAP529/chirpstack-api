@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package common;
 
-option go_package = "github.com/SAP529/chirpstack-api/go/v3/common";
+option go_package = "github.com/SAP529/chirpstack-api/go/v4/common";
 option java_package = "io.chirpstack.api.common";
 option java_multiple_files = true;
 option java_outer_classname = "CommonProto";

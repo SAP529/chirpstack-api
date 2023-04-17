@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package fuota;
 
-option go_package = "github.com/SAP529/chirpstack-api/go/v3/fuota";
+option go_package = "github.com/SAP529/chirpstack-api/go/v4/fuota";
 option java_package = "io.chirpstack.api.fuota";
 
 import "google/protobuf/timestamp.proto";

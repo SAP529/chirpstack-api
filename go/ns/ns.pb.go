@@ -6,8 +6,8 @@ package ns
 import (
 	context "context"
 	fmt "fmt"
-	common "github.com/SAP529/chirpstack-api/go/v3/common"
-	gw "github.com/SAP529/chirpstack-api/go/v3/gw"
+	common "github.com/SAP529/chirpstack-api/go/v4/common"
+	gw "github.com/SAP529/chirpstack-api/go/v4/gw"
 	proto "github.com/golang/protobuf/proto"
 	duration "github.com/golang/protobuf/ptypes/duration"
 	empty "github.com/golang/protobuf/ptypes/empty"

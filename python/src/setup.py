@@ -18,10 +18,10 @@ CLASSIFIERS = [
 
 setup(
     name='chirpstack-api',
-    version = "3.12.4",
-    url='https://github.com/brocaar/chirpstack-api',
-    author='Orne Brocaar',
-    author_email='info@brocaar.com',
+    version = "4.0.0",
+    url='https://github.com/SAP529/chirpstack-api',
+    author='Sagar Patel',
+    author_email='sagu25patel@hotmail.com',
     license='MIT',
     description='Chirpstack Python API',
     long_description=open('README.md').read(),

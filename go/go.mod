@@ -1,4 +1,4 @@
-module github.com/SAP529/chirpstack-api/go/v3
+module github.com/SAP529/chirpstack-api/go/v4
 
 go 1.16
 
