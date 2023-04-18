@@ -31,6 +31,8 @@ goog.exportSymbol('proto.api.GetLastPingResponse', null, global);
 goog.exportSymbol('proto.api.ListGatewayRequest', null, global);
 goog.exportSymbol('proto.api.ListGatewayResponse', null, global);
 goog.exportSymbol('proto.api.PingRX', null, global);
+goog.exportSymbol('proto.api.StreamGatewayEventLogsRequest', null, global);
+goog.exportSymbol('proto.api.StreamGatewayEventLogsResponse', null, global);
 goog.exportSymbol('proto.api.StreamGatewayFrameLogsRequest', null, global);
 goog.exportSymbol('proto.api.StreamGatewayFrameLogsResponse', null, global);
 goog.exportSymbol('proto.api.UpdateGatewayRequest', null, global);
@@ -3160,7 +3162,11 @@ proto.api.GatewayStats.toObject = function(includeInstance, msg) {
     rxPacketsPerFrequencyMap: (f = msg.getRxPacketsPerFrequencyMap(true)) ? f.toArray() : [],
     txPacketsPerDrMap: (f = msg.getTxPacketsPerDrMap(true)) ? f.toArray() : [],
     rxPacketsPerDrMap: (f = msg.getRxPacketsPerDrMap(true)) ? f.toArray() : [],
-    txPacketsPerStatusMap: (f = msg.getTxPacketsPerStatusMap(true)) ? f.toArray() : []
+    txPacketsPerStatusMap: (f = msg.getTxPacketsPerStatusMap(true)) ? f.toArray() : [],
+    connStatusMap: (f = msg.getConnStatusMap(true)) ? f.toArray() : [],
+    statsCount: msg.getStatsCount(),
+    rxFrequencyUtilizationMap: (f = msg.getRxFrequencyUtilizationMap(true)) ? f.toArray() : [],
+    txFrequencyUtilizationMap: (f = msg.getTxFrequencyUtilizationMap(true)) ? f.toArray() : []
   };
 
   if (includeInstance) {
@@ -3246,6 +3252,28 @@ proto.api.GatewayStats.deserializeBinaryFromReader = function(msg, reader) {
       var value = msg.getTxPacketsPerStatusMap();
       reader.readMessage(value, function(message, reader) {
         jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readUint32);
+         });
+      break;
+    case 11:
+      var value = msg.getConnStatusMap();
+      reader.readMessage(value, function(message, reader) {
+        jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readUint32);
+         });
+      break;
+    case 12:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setStatsCount(value);
+      break;
+    case 13:
+      var value = msg.getRxFrequencyUtilizationMap();
+      reader.readMessage(value, function(message, reader) {
+        jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readUint32, jspb.BinaryReader.prototype.readFloat);
+         });
+      break;
+    case 14:
+      var value = msg.getTxFrequencyUtilizationMap();
+      reader.readMessage(value, function(message, reader) {
+        jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readUint32, jspb.BinaryReader.prototype.readFloat);
          });
       break;
     default:
@@ -3341,6 +3369,25 @@ proto.api.GatewayStats.prototype.serializeBinaryToWriter = function (writer) {
   f = this.getTxPacketsPerStatusMap(true);
   if (f && f.getLength() > 0) {
     f.serializeBinary(10, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeUint32);
+  }
+  f = this.getConnStatusMap(true);
+  if (f && f.getLength() > 0) {
+    f.serializeBinary(11, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeUint32);
+  }
+  f = this.getStatsCount();
+  if (f !== 0) {
+    writer.writeInt32(
+      12,
+      f
+    );
+  }
+  f = this.getRxFrequencyUtilizationMap(true);
+  if (f && f.getLength() > 0) {
+    f.serializeBinary(13, writer, jspb.BinaryWriter.prototype.writeUint32, jspb.BinaryWriter.prototype.writeFloat);
+  }
+  f = this.getTxFrequencyUtilizationMap(true);
+  if (f && f.getLength() > 0) {
+    f.serializeBinary(14, writer, jspb.BinaryWriter.prototype.writeUint32, jspb.BinaryWriter.prototype.writeFloat);
   }
 };
 
@@ -3505,6 +3552,60 @@ proto.api.GatewayStats.prototype.getRxPacketsPerDrMap = function(opt_noLazyCreat
 proto.api.GatewayStats.prototype.getTxPacketsPerStatusMap = function(opt_noLazyCreate) {
   return /** @type {!jspb.Map<string,number>} */ (
       jspb.Message.getMapField(this, 10, opt_noLazyCreate,
+      null));
+};
+
+
+/**
+ * map<string, uint32> conn_status = 11;
+ * @param {boolean=} opt_noLazyCreate Do not create the map if
+ * empty, instead returning `undefined`
+ * @return {!jspb.Map<string,number>}
+ */
+proto.api.GatewayStats.prototype.getConnStatusMap = function(opt_noLazyCreate) {
+  return /** @type {!jspb.Map<string,number>} */ (
+      jspb.Message.getMapField(this, 11, opt_noLazyCreate,
+      null));
+};
+
+
+/**
+ * optional int32 stats_count = 12;
+ * @return {number}
+ */
+proto.api.GatewayStats.prototype.getStatsCount = function() {
+  return /** @type {number} */ (jspb.Message.getFieldProto3(this, 12, 0));
+};
+
+
+/** @param {number} value  */
+proto.api.GatewayStats.prototype.setStatsCount = function(value) {
+  jspb.Message.setField(this, 12, value);
+};
+
+
+/**
+ * map<uint32, float> rx_frequency_utilization = 13;
+ * @param {boolean=} opt_noLazyCreate Do not create the map if
+ * empty, instead returning `undefined`
+ * @return {!jspb.Map<number,number>}
+ */
+proto.api.GatewayStats.prototype.getRxFrequencyUtilizationMap = function(opt_noLazyCreate) {
+  return /** @type {!jspb.Map<number,number>} */ (
+      jspb.Message.getMapField(this, 13, opt_noLazyCreate,
+      null));
+};
+
+
+/**
+ * map<uint32, float> tx_frequency_utilization = 14;
+ * @param {boolean=} opt_noLazyCreate Do not create the map if
+ * empty, instead returning `undefined`
+ * @return {!jspb.Map<number,number>}
+ */
+proto.api.GatewayStats.prototype.getTxFrequencyUtilizationMap = function(opt_noLazyCreate) {
+  return /** @type {!jspb.Map<number,number>} */ (
+      jspb.Message.getMapField(this, 14, opt_noLazyCreate,
       null));
 };
 
@@ -5092,6 +5193,422 @@ proto.api.StreamGatewayFrameLogsResponse.prototype.clearDownlinkFrame = function
  */
 proto.api.StreamGatewayFrameLogsResponse.prototype.hasDownlinkFrame = function() {
   return jspb.Message.getField(this, 2) != null;
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.StreamGatewayEventLogsRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.StreamGatewayEventLogsRequest, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.api.StreamGatewayEventLogsRequest.displayName = 'proto.api.StreamGatewayEventLogsRequest';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.StreamGatewayEventLogsRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.StreamGatewayEventLogsRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.StreamGatewayEventLogsRequest} msg The msg instance to transform.
+ * @return {!Object}
+ */
+proto.api.StreamGatewayEventLogsRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    gatewayId: msg.getGatewayId()
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.StreamGatewayEventLogsRequest}
+ */
+proto.api.StreamGatewayEventLogsRequest.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.StreamGatewayEventLogsRequest;
+  return proto.api.StreamGatewayEventLogsRequest.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.StreamGatewayEventLogsRequest} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.StreamGatewayEventLogsRequest}
+ */
+proto.api.StreamGatewayEventLogsRequest.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setGatewayId(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Class method variant: serializes the given message to binary data
+ * (in protobuf wire format), writing to the given BinaryWriter.
+ * @param {!proto.api.StreamGatewayEventLogsRequest} message
+ * @param {!jspb.BinaryWriter} writer
+ */
+proto.api.StreamGatewayEventLogsRequest.serializeBinaryToWriter = function(message, writer) {
+  message.serializeBinaryToWriter(writer);
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.StreamGatewayEventLogsRequest.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  this.serializeBinaryToWriter(writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format),
+ * writing to the given BinaryWriter.
+ * @param {!jspb.BinaryWriter} writer
+ */
+proto.api.StreamGatewayEventLogsRequest.prototype.serializeBinaryToWriter = function (writer) {
+  var f = undefined;
+  f = this.getGatewayId();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+};
+
+
+/**
+ * Creates a deep clone of this proto. No data is shared with the original.
+ * @return {!proto.api.StreamGatewayEventLogsRequest} The clone.
+ */
+proto.api.StreamGatewayEventLogsRequest.prototype.cloneMessage = function() {
+  return /** @type {!proto.api.StreamGatewayEventLogsRequest} */ (jspb.Message.cloneMessage(this));
+};
+
+
+/**
+ * optional string gateway_id = 1;
+ * @return {string}
+ */
+proto.api.StreamGatewayEventLogsRequest.prototype.getGatewayId = function() {
+  return /** @type {string} */ (jspb.Message.getFieldProto3(this, 1, ""));
+};
+
+
+/** @param {string} value  */
+proto.api.StreamGatewayEventLogsRequest.prototype.setGatewayId = function(value) {
+  jspb.Message.setField(this, 1, value);
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.StreamGatewayEventLogsResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.StreamGatewayEventLogsResponse, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.api.StreamGatewayEventLogsResponse.displayName = 'proto.api.StreamGatewayEventLogsResponse';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.StreamGatewayEventLogsResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.StreamGatewayEventLogsResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.StreamGatewayEventLogsResponse} msg The msg instance to transform.
+ * @return {!Object}
+ */
+proto.api.StreamGatewayEventLogsResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    type: msg.getType(),
+    payloadJson: msg.getPayloadJson(),
+    publishedAt: (f = msg.getPublishedAt()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+    streamId: msg.getStreamId()
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.StreamGatewayEventLogsResponse}
+ */
+proto.api.StreamGatewayEventLogsResponse.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.StreamGatewayEventLogsResponse;
+  return proto.api.StreamGatewayEventLogsResponse.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.StreamGatewayEventLogsResponse} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.StreamGatewayEventLogsResponse}
+ */
+proto.api.StreamGatewayEventLogsResponse.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setType(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setPayloadJson(value);
+      break;
+    case 3:
+      var value = new google_protobuf_timestamp_pb.Timestamp;
+      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
+      msg.setPublishedAt(value);
+      break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setStreamId(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Class method variant: serializes the given message to binary data
+ * (in protobuf wire format), writing to the given BinaryWriter.
+ * @param {!proto.api.StreamGatewayEventLogsResponse} message
+ * @param {!jspb.BinaryWriter} writer
+ */
+proto.api.StreamGatewayEventLogsResponse.serializeBinaryToWriter = function(message, writer) {
+  message.serializeBinaryToWriter(writer);
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.StreamGatewayEventLogsResponse.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  this.serializeBinaryToWriter(writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format),
+ * writing to the given BinaryWriter.
+ * @param {!jspb.BinaryWriter} writer
+ */
+proto.api.StreamGatewayEventLogsResponse.prototype.serializeBinaryToWriter = function (writer) {
+  var f = undefined;
+  f = this.getType();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = this.getPayloadJson();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = this.getPublishedAt();
+  if (f != null) {
+    writer.writeMessage(
+      3,
+      f,
+      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
+    );
+  }
+  f = this.getStreamId();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
+      f
+    );
+  }
+};
+
+
+/**
+ * Creates a deep clone of this proto. No data is shared with the original.
+ * @return {!proto.api.StreamGatewayEventLogsResponse} The clone.
+ */
+proto.api.StreamGatewayEventLogsResponse.prototype.cloneMessage = function() {
+  return /** @type {!proto.api.StreamGatewayEventLogsResponse} */ (jspb.Message.cloneMessage(this));
+};
+
+
+/**
+ * optional string type = 1;
+ * @return {string}
+ */
+proto.api.StreamGatewayEventLogsResponse.prototype.getType = function() {
+  return /** @type {string} */ (jspb.Message.getFieldProto3(this, 1, ""));
+};
+
+
+/** @param {string} value  */
+proto.api.StreamGatewayEventLogsResponse.prototype.setType = function(value) {
+  jspb.Message.setField(this, 1, value);
+};
+
+
+/**
+ * optional string payload_json = 2;
+ * @return {string}
+ */
+proto.api.StreamGatewayEventLogsResponse.prototype.getPayloadJson = function() {
+  return /** @type {string} */ (jspb.Message.getFieldProto3(this, 2, ""));
+};
+
+
+/** @param {string} value  */
+proto.api.StreamGatewayEventLogsResponse.prototype.setPayloadJson = function(value) {
+  jspb.Message.setField(this, 2, value);
+};
+
+
+/**
+ * optional google.protobuf.Timestamp published_at = 3;
+ * @return {proto.google.protobuf.Timestamp}
+ */
+proto.api.StreamGatewayEventLogsResponse.prototype.getPublishedAt = function() {
+  return /** @type{proto.google.protobuf.Timestamp} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 3));
+};
+
+
+/** @param {proto.google.protobuf.Timestamp|undefined} value  */
+proto.api.StreamGatewayEventLogsResponse.prototype.setPublishedAt = function(value) {
+  jspb.Message.setWrapperField(this, 3, value);
+};
+
+
+proto.api.StreamGatewayEventLogsResponse.prototype.clearPublishedAt = function() {
+  this.setPublishedAt(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return{!boolean}
+ */
+proto.api.StreamGatewayEventLogsResponse.prototype.hasPublishedAt = function() {
+  return jspb.Message.getField(this, 3) != null;
+};
+
+
+/**
+ * optional string stream_id = 4;
+ * @return {string}
+ */
+proto.api.StreamGatewayEventLogsResponse.prototype.getStreamId = function() {
+  return /** @type {string} */ (jspb.Message.getFieldProto3(this, 4, ""));
+};
+
+
+/** @param {string} value  */
+proto.api.StreamGatewayEventLogsResponse.prototype.setStreamId = function(value) {
+  jspb.Message.setField(this, 4, value);
 };
 
 

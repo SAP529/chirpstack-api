@@ -86,6 +86,16 @@ service GatewayService {
             get: "/api/gateways/{gateway_id}/frames"
         };
 	}
+
+	// StreamEventLogs streams the connection event logs given gateway ID.
+	// Notes:
+	//   * These are the raw LoRaWAN frames and this endpoint is intended for debugging only.
+	//   * This endpoint does not work from a web-browser.
+    rpc StreamEventLogs(StreamGatewayEventLogsRequest) returns (stream StreamGatewayEventLogsResponse) {
+        option (google.api.http) = {
+            get: "/api/gateways/{gateway_id}/events"
+        };
+	}
 }
 
 message Gateway {
@@ -284,6 +294,18 @@ message GatewayStats {
 
     // Tx packets per status.
     map<string, uint32> tx_packets_per_status = 10;
+
+	// Gateway Connection Status (ONLINE/OFFLINE)
+    map<string, uint32> conn_status = 11;
+
+	// Stat Packet count
+	int32 stats_count = 12;
+
+	// Rx packets (Received) frequency utilization.
+    map<uint32, float> rx_frequency_utilization = 13;
+
+	// Tx packets (Transmitted) frequency utilization.
+    map<uint32, float> tx_frequency_utilization = 14;
 }
 
 message GetGatewayStatsRequest {
@@ -357,4 +379,22 @@ message StreamGatewayFrameLogsResponse {
         // Contains a downlink frame.
         DownlinkFrameLog downlink_frame = 2;
     }
+}
+message StreamGatewayEventLogsRequest {
+	// Gateway ID (HEX encoded).
+	string gateway_id = 1 [json_name = "gatewayID"];
+}
+
+message StreamGatewayEventLogsResponse {
+   // The event type.
+    string type = 1;
+
+    // The event payload in JSON encoding.
+    string payload_json = 2 [json_name = "payloadJSON"];
+
+    // Published at timestamp.
+    google.protobuf.Timestamp published_at = 3;
+
+    // Stream ID.
+    string stream_id = 4 [json_name = "streamID"];
 }

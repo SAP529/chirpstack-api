@@ -510,6 +510,50 @@ export namespace IntegrationEvent {
   }
 }
 
+export class GatewayConnStatEvent extends jspb.Message {
+  getGatewayId(): Uint8Array | string;
+  getGatewayId_asU8(): Uint8Array;
+  getGatewayId_asB64(): string;
+  setGatewayId(value: Uint8Array | string): void;
+
+  getState(): gw_gw_pb.StateMap[keyof gw_gw_pb.StateMap];
+  setState(value: gw_gw_pb.StateMap[keyof gw_gw_pb.StateMap]): void;
+
+  getMetaDataMap(): jspb.Map<string, string>;
+  clearMetaDataMap(): void;
+  getTagsMap(): jspb.Map<string, string>;
+  clearTagsMap(): void;
+  getStatsId(): Uint8Array | string;
+  getStatsId_asU8(): Uint8Array;
+  getStatsId_asB64(): string;
+  setStatsId(value: Uint8Array | string): void;
+
+  hasPublishedAt(): boolean;
+  clearPublishedAt(): void;
+  getPublishedAt(): google_protobuf_timestamp_pb.Timestamp | undefined;
+  setPublishedAt(value?: google_protobuf_timestamp_pb.Timestamp): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GatewayConnStatEvent.AsObject;
+  static toObject(includeInstance: boolean, msg: GatewayConnStatEvent): GatewayConnStatEvent.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: GatewayConnStatEvent, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GatewayConnStatEvent;
+  static deserializeBinaryFromReader(message: GatewayConnStatEvent, reader: jspb.BinaryReader): GatewayConnStatEvent;
+}
+
+export namespace GatewayConnStatEvent {
+  export type AsObject = {
+    gatewayId: Uint8Array | string,
+    state: gw_gw_pb.StateMap[keyof gw_gw_pb.StateMap],
+    metaDataMap: Array<[string, string]>,
+    tagsMap: Array<[string, string]>,
+    statsId: Uint8Array | string,
+    publishedAt?: google_protobuf_timestamp_pb.Timestamp.AsObject,
+  }
+}
+
 export interface ErrorTypeMap {
   UNKNOWN: 0;
   DOWNLINK_PAYLOAD_SIZE: 1;

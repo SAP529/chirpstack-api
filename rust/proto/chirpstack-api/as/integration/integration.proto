@@ -326,3 +326,27 @@ message IntegrationEvent {
     // Published at timestamp.
     google.protobuf.Timestamp published_at = 9;
 }
+
+// GatewayConnStatEvent is the message sent gateway connection stats.
+message GatewayConnStatEvent {
+    // Gateway ID.
+    bytes gateway_id = 1 [json_name = "gatewayID"];
+
+    // Stat contains Gateway connection status ONLINE/OFFLINE
+    gw.State state = 2;
+
+    // Additional gateway meta-data.
+    map<string, string> meta_data = 3;
+
+    // Tags (user defined).
+    // These tags are exposed in the stat event payloads or to integration. Tags are
+    // intended for aggregation and filtering.
+    map<string, string> tags = 4;
+
+    // Stats ID (UUID).
+    // Unique identifier for the gateway stats.
+    bytes stats_id = 5 [json_name = "statsID"];
+
+    // Published at timestamp.
+    google.protobuf.Timestamp published_at = 6;
+}

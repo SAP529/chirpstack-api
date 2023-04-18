@@ -17,6 +17,7 @@ interface IGatewayServiceService extends grpc.ServiceDefinition<grpc.UntypedServ
   getLastPing: grpc.MethodDefinition<as_external_api_gateway_pb.GetLastPingRequest, as_external_api_gateway_pb.GetLastPingResponse>;
   generateGatewayClientCertificate: grpc.MethodDefinition<as_external_api_gateway_pb.GenerateGatewayClientCertificateRequest, as_external_api_gateway_pb.GenerateGatewayClientCertificateResponse>;
   streamFrameLogs: grpc.MethodDefinition<as_external_api_gateway_pb.StreamGatewayFrameLogsRequest, as_external_api_gateway_pb.StreamGatewayFrameLogsResponse>;
+  streamEventLogs: grpc.MethodDefinition<as_external_api_gateway_pb.StreamGatewayEventLogsRequest, as_external_api_gateway_pb.StreamGatewayEventLogsResponse>;
 }
 
 export const GatewayServiceService: IGatewayServiceService;
@@ -31,6 +32,7 @@ export interface IGatewayServiceServer extends grpc.UntypedServiceImplementation
   getLastPing: grpc.handleUnaryCall<as_external_api_gateway_pb.GetLastPingRequest, as_external_api_gateway_pb.GetLastPingResponse>;
   generateGatewayClientCertificate: grpc.handleUnaryCall<as_external_api_gateway_pb.GenerateGatewayClientCertificateRequest, as_external_api_gateway_pb.GenerateGatewayClientCertificateResponse>;
   streamFrameLogs: grpc.handleServerStreamingCall<as_external_api_gateway_pb.StreamGatewayFrameLogsRequest, as_external_api_gateway_pb.StreamGatewayFrameLogsResponse>;
+  streamEventLogs: grpc.handleServerStreamingCall<as_external_api_gateway_pb.StreamGatewayEventLogsRequest, as_external_api_gateway_pb.StreamGatewayEventLogsResponse>;
 }
 
 export class GatewayServiceClient extends grpc.Client {
@@ -61,4 +63,6 @@ export class GatewayServiceClient extends grpc.Client {
   generateGatewayClientCertificate(argument: as_external_api_gateway_pb.GenerateGatewayClientCertificateRequest, metadata: grpc.Metadata | null, options: grpc.CallOptions | null, callback: grpc.requestCallback<as_external_api_gateway_pb.GenerateGatewayClientCertificateResponse>): grpc.ClientUnaryCall;
   streamFrameLogs(argument: as_external_api_gateway_pb.StreamGatewayFrameLogsRequest, metadataOrOptions?: grpc.Metadata | grpc.CallOptions | null): grpc.ClientReadableStream<as_external_api_gateway_pb.StreamGatewayFrameLogsResponse>;
   streamFrameLogs(argument: as_external_api_gateway_pb.StreamGatewayFrameLogsRequest, metadata?: grpc.Metadata | null, options?: grpc.CallOptions | null): grpc.ClientReadableStream<as_external_api_gateway_pb.StreamGatewayFrameLogsResponse>;
+  streamEventLogs(argument: as_external_api_gateway_pb.StreamGatewayEventLogsRequest, metadataOrOptions?: grpc.Metadata | grpc.CallOptions | null): grpc.ClientReadableStream<as_external_api_gateway_pb.StreamGatewayEventLogsResponse>;
+  streamEventLogs(argument: as_external_api_gateway_pb.StreamGatewayEventLogsRequest, metadata?: grpc.Metadata | null, options?: grpc.CallOptions | null): grpc.ClientReadableStream<as_external_api_gateway_pb.StreamGatewayEventLogsResponse>;
 }
