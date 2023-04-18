@@ -96,6 +96,13 @@ service GatewayService {
             get: "/api/gateways/{gateway_id}/events"
         };
 	}
+
+	// Get returns the gateway status matching the given GatewayEUI.
+    rpc GetStatus(GetGatewayStatusRequest) returns (GetGatewayStatusResponse) {
+        option (google.api.http) = {
+            get: "/api/gateways/{gateway_id}/status"
+        };
+    }
 }
 
 message Gateway {
@@ -397,4 +404,17 @@ message StreamGatewayEventLogsResponse {
 
     // Stream ID.
     string stream_id = 4 [json_name = "streamID"];
+}
+
+message GetGatewayStatusRequest {
+    // Gateway ID (HEX encoded).
+    string gateway_id = 1 [json_name = "gatewayID"];
+}
+
+message GetGatewayStatusResponse {
+     // Gateway ID (HEX encoded).
+    string gateway_id = 1 [json_name = "gatewayID"];
+   
+    // Never seen count.
+    string status = 2;
 }

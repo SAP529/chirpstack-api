@@ -97,6 +97,28 @@ function deserialize_api_GetGatewayStatsResponse(buffer_arg) {
   return as_external_api_gateway_pb.GetGatewayStatsResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_GetGatewayStatusRequest(arg) {
+  if (!(arg instanceof as_external_api_gateway_pb.GetGatewayStatusRequest)) {
+    throw new Error('Expected argument of type api.GetGatewayStatusRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetGatewayStatusRequest(buffer_arg) {
+  return as_external_api_gateway_pb.GetGatewayStatusRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetGatewayStatusResponse(arg) {
+  if (!(arg instanceof as_external_api_gateway_pb.GetGatewayStatusResponse)) {
+    throw new Error('Expected argument of type api.GetGatewayStatusResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetGatewayStatusResponse(buffer_arg) {
+  return as_external_api_gateway_pb.GetGatewayStatusResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_GetLastPingRequest(arg) {
   if (!(arg instanceof as_external_api_gateway_pb.GetLastPingRequest)) {
     throw new Error('Expected argument of type api.GetLastPingRequest');
@@ -338,6 +360,18 @@ streamEventLogs: {
     requestDeserialize: deserialize_api_StreamGatewayEventLogsRequest,
     responseSerialize: serialize_api_StreamGatewayEventLogsResponse,
     responseDeserialize: deserialize_api_StreamGatewayEventLogsResponse,
+  },
+  // Get returns the gateway status matching the given GatewayEUI.
+getStatus: {
+    path: '/api.GatewayService/GetStatus',
+    requestStream: false,
+    responseStream: false,
+    requestType: as_external_api_gateway_pb.GetGatewayStatusRequest,
+    responseType: as_external_api_gateway_pb.GetGatewayStatusResponse,
+    requestSerialize: serialize_api_GetGatewayStatusRequest,
+    requestDeserialize: deserialize_api_GetGatewayStatusRequest,
+    responseSerialize: serialize_api_GetGatewayStatusResponse,
+    responseDeserialize: deserialize_api_GetGatewayStatusResponse,
   },
 };
 

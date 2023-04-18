@@ -145,6 +145,13 @@ service DeviceService {
             delete: "/api/devices/{dev_eui}/devnonce"
         };
     }
+
+    // Get returns the device status matching the given DevEUI.
+    rpc GetStatus(GetDeviceStatusRequest) returns (GetDeviceStatusResponse) {
+        option (google.api.http) = {
+            get: "/api/devices/{dev_eui}/status"
+        };
+    }
 }
 
 message Device {
@@ -496,4 +503,17 @@ message StreamDeviceEventLogsResponse {
 message ClearDeviceNoncesRequest {
     // Device EUI (HEX encoded).
     string dev_eui = 1 [json_name = "devEUI"];
+}
+
+message GetDeviceStatusRequest {
+    // Device EUI (HEX encoded).
+    string dev_eui = 1 [json_name = "devEUI"];
+}
+
+message GetDeviceStatusResponse {
+     // Device EUI (HEX encoded).
+    string dev_eui = 1 [json_name = "devEUI"];
+   
+    // Never seen count.
+    string status = 2;
 }

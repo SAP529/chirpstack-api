@@ -277,6 +277,32 @@
         ]
       }
     },
+    "/api/gateways/{gateway_id}/status": {
+      "get": {
+        "summary": "Get returns the gateway status matching the given GatewayEUI.",
+        "operationId": "GetStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetGatewayStatusResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "gateway_id",
+            "description": "Gateway ID (HEX encoded).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "GatewayService"
+        ]
+      }
+    },
     "/api/gateways/{id}": {
       "get": {
         "summary": "Get returns the gateway for the requested mac address.",
@@ -651,6 +677,19 @@
           "items": {
             "$ref": "#/definitions/apiGatewayStats"
           }
+        }
+      }
+    },
+    "apiGetGatewayStatusResponse": {
+      "type": "object",
+      "properties": {
+        "gatewayID": {
+          "type": "string",
+          "description": "Gateway ID (HEX encoded)."
+        },
+        "status": {
+          "type": "string",
+          "description": "Never seen count."
         }
       }
     },

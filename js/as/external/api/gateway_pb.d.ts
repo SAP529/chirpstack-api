@@ -739,3 +739,47 @@ export namespace StreamGatewayEventLogsResponse {
   }
 }
 
+export class GetGatewayStatusRequest extends jspb.Message {
+  getGatewayId(): string;
+  setGatewayId(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetGatewayStatusRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetGatewayStatusRequest): GetGatewayStatusRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: GetGatewayStatusRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetGatewayStatusRequest;
+  static deserializeBinaryFromReader(message: GetGatewayStatusRequest, reader: jspb.BinaryReader): GetGatewayStatusRequest;
+}
+
+export namespace GetGatewayStatusRequest {
+  export type AsObject = {
+    gatewayId: string,
+  }
+}
+
+export class GetGatewayStatusResponse extends jspb.Message {
+  getGatewayId(): string;
+  setGatewayId(value: string): void;
+
+  getStatus(): string;
+  setStatus(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetGatewayStatusResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetGatewayStatusResponse): GetGatewayStatusResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: GetGatewayStatusResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetGatewayStatusResponse;
+  static deserializeBinaryFromReader(message: GetGatewayStatusResponse, reader: jspb.BinaryReader): GetGatewayStatusResponse;
+}
+
+export namespace GetGatewayStatusResponse {
+  export type AsObject = {
+    gatewayId: string,
+    status: string,
+  }
+}
+

@@ -867,3 +867,47 @@ export namespace ClearDeviceNoncesRequest {
   }
 }
 
+export class GetDeviceStatusRequest extends jspb.Message {
+  getDevEui(): string;
+  setDevEui(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetDeviceStatusRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetDeviceStatusRequest): GetDeviceStatusRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: GetDeviceStatusRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetDeviceStatusRequest;
+  static deserializeBinaryFromReader(message: GetDeviceStatusRequest, reader: jspb.BinaryReader): GetDeviceStatusRequest;
+}
+
+export namespace GetDeviceStatusRequest {
+  export type AsObject = {
+    devEui: string,
+  }
+}
+
+export class GetDeviceStatusResponse extends jspb.Message {
+  getDevEui(): string;
+  setDevEui(value: string): void;
+
+  getStatus(): string;
+  setStatus(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetDeviceStatusResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetDeviceStatusResponse): GetDeviceStatusResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: GetDeviceStatusResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetDeviceStatusResponse;
+  static deserializeBinaryFromReader(message: GetDeviceStatusResponse, reader: jspb.BinaryReader): GetDeviceStatusResponse;
+}
+
+export namespace GetDeviceStatusResponse {
+  export type AsObject = {
+    devEui: string,
+    status: string,
+  }
+}
+

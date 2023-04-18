@@ -25,6 +25,7 @@ interface IDeviceServiceService extends grpc.ServiceDefinition<grpc.UntypedServi
   streamFrameLogs: grpc.MethodDefinition<as_external_api_device_pb.StreamDeviceFrameLogsRequest, as_external_api_device_pb.StreamDeviceFrameLogsResponse>;
   streamEventLogs: grpc.MethodDefinition<as_external_api_device_pb.StreamDeviceEventLogsRequest, as_external_api_device_pb.StreamDeviceEventLogsResponse>;
   clearDeviceNonces: grpc.MethodDefinition<as_external_api_device_pb.ClearDeviceNoncesRequest, google_protobuf_empty_pb.Empty>;
+  getStatus: grpc.MethodDefinition<as_external_api_device_pb.GetDeviceStatusRequest, as_external_api_device_pb.GetDeviceStatusResponse>;
 }
 
 export const DeviceServiceService: IDeviceServiceService;
@@ -47,6 +48,7 @@ export interface IDeviceServiceServer extends grpc.UntypedServiceImplementation 
   streamFrameLogs: grpc.handleServerStreamingCall<as_external_api_device_pb.StreamDeviceFrameLogsRequest, as_external_api_device_pb.StreamDeviceFrameLogsResponse>;
   streamEventLogs: grpc.handleServerStreamingCall<as_external_api_device_pb.StreamDeviceEventLogsRequest, as_external_api_device_pb.StreamDeviceEventLogsResponse>;
   clearDeviceNonces: grpc.handleUnaryCall<as_external_api_device_pb.ClearDeviceNoncesRequest, google_protobuf_empty_pb.Empty>;
+  getStatus: grpc.handleUnaryCall<as_external_api_device_pb.GetDeviceStatusRequest, as_external_api_device_pb.GetDeviceStatusResponse>;
 }
 
 export class DeviceServiceClient extends grpc.Client {
@@ -100,4 +102,7 @@ export class DeviceServiceClient extends grpc.Client {
   clearDeviceNonces(argument: as_external_api_device_pb.ClearDeviceNoncesRequest, callback: grpc.requestCallback<google_protobuf_empty_pb.Empty>): grpc.ClientUnaryCall;
   clearDeviceNonces(argument: as_external_api_device_pb.ClearDeviceNoncesRequest, metadataOrOptions: grpc.Metadata | grpc.CallOptions | null, callback: grpc.requestCallback<google_protobuf_empty_pb.Empty>): grpc.ClientUnaryCall;
   clearDeviceNonces(argument: as_external_api_device_pb.ClearDeviceNoncesRequest, metadata: grpc.Metadata | null, options: grpc.CallOptions | null, callback: grpc.requestCallback<google_protobuf_empty_pb.Empty>): grpc.ClientUnaryCall;
+  getStatus(argument: as_external_api_device_pb.GetDeviceStatusRequest, callback: grpc.requestCallback<as_external_api_device_pb.GetDeviceStatusResponse>): grpc.ClientUnaryCall;
+  getStatus(argument: as_external_api_device_pb.GetDeviceStatusRequest, metadataOrOptions: grpc.Metadata | grpc.CallOptions | null, callback: grpc.requestCallback<as_external_api_device_pb.GetDeviceStatusResponse>): grpc.ClientUnaryCall;
+  getStatus(argument: as_external_api_device_pb.GetDeviceStatusRequest, metadata: grpc.Metadata | null, options: grpc.CallOptions | null, callback: grpc.requestCallback<as_external_api_device_pb.GetDeviceStatusResponse>): grpc.ClientUnaryCall;
 }

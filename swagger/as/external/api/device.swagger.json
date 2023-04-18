@@ -407,6 +407,32 @@
         ]
       }
     },
+    "/api/devices/{dev_eui}/status": {
+      "get": {
+        "summary": "Get returns the device status matching the given DevEUI.",
+        "operationId": "GetStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetDeviceStatusResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "dev_eui",
+            "description": "Device EUI (HEX encoded).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "DeviceService"
+        ]
+      }
+    },
     "/api/devices/{device.dev_eui}": {
       "put": {
         "summary": "Update updates the device matching the given DevEUI.",
@@ -874,6 +900,19 @@
           "items": {
             "$ref": "#/definitions/apiDeviceStats"
           }
+        }
+      }
+    },
+    "apiGetDeviceStatusResponse": {
+      "type": "object",
+      "properties": {
+        "devEUI": {
+          "type": "string",
+          "description": "Device EUI (HEX encoded)."
+        },
+        "status": {
+          "type": "string",
+          "description": "Never seen count."
         }
       }
     },

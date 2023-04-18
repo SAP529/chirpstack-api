@@ -174,6 +174,28 @@ function deserialize_api_GetDeviceStatsResponse(buffer_arg) {
   return as_external_api_device_pb.GetDeviceStatsResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_GetDeviceStatusRequest(arg) {
+  if (!(arg instanceof as_external_api_device_pb.GetDeviceStatusRequest)) {
+    throw new Error('Expected argument of type api.GetDeviceStatusRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetDeviceStatusRequest(buffer_arg) {
+  return as_external_api_device_pb.GetDeviceStatusRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetDeviceStatusResponse(arg) {
+  if (!(arg instanceof as_external_api_device_pb.GetDeviceStatusResponse)) {
+    throw new Error('Expected argument of type api.GetDeviceStatusResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetDeviceStatusResponse(buffer_arg) {
+  return as_external_api_device_pb.GetDeviceStatusResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_GetRandomDevAddrRequest(arg) {
   if (!(arg instanceof as_external_api_device_pb.GetRandomDevAddrRequest)) {
     throw new Error('Expected argument of type api.GetRandomDevAddrRequest');
@@ -507,6 +529,18 @@ clearDeviceNonces: {
     requestDeserialize: deserialize_api_ClearDeviceNoncesRequest,
     responseSerialize: serialize_google_protobuf_Empty,
     responseDeserialize: deserialize_google_protobuf_Empty,
+  },
+  // Get returns the device status matching the given DevEUI.
+getStatus: {
+    path: '/api.DeviceService/GetStatus',
+    requestStream: false,
+    responseStream: false,
+    requestType: as_external_api_device_pb.GetDeviceStatusRequest,
+    responseType: as_external_api_device_pb.GetDeviceStatusResponse,
+    requestSerialize: serialize_api_GetDeviceStatusRequest,
+    requestDeserialize: deserialize_api_GetDeviceStatusRequest,
+    responseSerialize: serialize_api_GetDeviceStatusResponse,
+    responseDeserialize: deserialize_api_GetDeviceStatusResponse,
   },
 };
 
