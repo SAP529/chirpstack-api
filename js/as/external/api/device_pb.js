@@ -40,6 +40,7 @@ goog.exportSymbol('proto.api.GetRandomDevAddrRequest', null, global);
 goog.exportSymbol('proto.api.GetRandomDevAddrResponse', null, global);
 goog.exportSymbol('proto.api.ListDeviceRequest', null, global);
 goog.exportSymbol('proto.api.ListDeviceResponse', null, global);
+goog.exportSymbol('proto.api.PacketSuccess', null, global);
 goog.exportSymbol('proto.api.StreamDeviceEventLogsRequest', null, global);
 goog.exportSymbol('proto.api.StreamDeviceEventLogsResponse', null, global);
 goog.exportSymbol('proto.api.StreamDeviceFrameLogsRequest', null, global);
@@ -1548,7 +1549,8 @@ proto.api.GetDeviceResponse.toObject = function(includeInstance, msg) {
     lastSeenAt: (f = msg.getLastSeenAt()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
     deviceStatusBattery: msg.getDeviceStatusBattery(),
     deviceStatusMargin: msg.getDeviceStatusMargin(),
-    location: (f = msg.getLocation()) && common_common_pb.Location.toObject(includeInstance, f)
+    location: (f = msg.getLocation()) && common_common_pb.Location.toObject(includeInstance, f),
+    packetSuccessRate: (f = msg.getPacketSuccessRate()) && proto.api.PacketSuccess.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -1607,6 +1609,11 @@ proto.api.GetDeviceResponse.deserializeBinaryFromReader = function(msg, reader) 
       var value = new common_common_pb.Location;
       reader.readMessage(value,common_common_pb.Location.deserializeBinaryFromReader);
       msg.setLocation(value);
+      break;
+    case 22:
+      var value = new proto.api.PacketSuccess;
+      reader.readMessage(value,proto.api.PacketSuccess.deserializeBinaryFromReader);
+      msg.setPacketSuccessRate(value);
       break;
     default:
       reader.skipField();
@@ -1682,6 +1689,14 @@ proto.api.GetDeviceResponse.prototype.serializeBinaryToWriter = function (writer
       21,
       f,
       common_common_pb.Location.serializeBinaryToWriter
+    );
+  }
+  f = this.getPacketSuccessRate();
+  if (f != null) {
+    writer.writeMessage(
+      22,
+      f,
+      proto.api.PacketSuccess.serializeBinaryToWriter
     );
   }
 };
@@ -1813,6 +1828,36 @@ proto.api.GetDeviceResponse.prototype.clearLocation = function() {
  */
 proto.api.GetDeviceResponse.prototype.hasLocation = function() {
   return jspb.Message.getField(this, 21) != null;
+};
+
+
+/**
+ * optional PacketSuccess packet_success_rate = 22;
+ * @return {proto.api.PacketSuccess}
+ */
+proto.api.GetDeviceResponse.prototype.getPacketSuccessRate = function() {
+  return /** @type{proto.api.PacketSuccess} */ (
+    jspb.Message.getWrapperField(this, proto.api.PacketSuccess, 22));
+};
+
+
+/** @param {proto.api.PacketSuccess|undefined} value  */
+proto.api.GetDeviceResponse.prototype.setPacketSuccessRate = function(value) {
+  jspb.Message.setWrapperField(this, 22, value);
+};
+
+
+proto.api.GetDeviceResponse.prototype.clearPacketSuccessRate = function() {
+  this.setPacketSuccessRate(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return{!boolean}
+ */
+proto.api.GetDeviceResponse.prototype.hasPacketSuccessRate = function() {
+  return jspb.Message.getField(this, 22) != null;
 };
 
 
@@ -4935,7 +4980,8 @@ proto.api.DeviceStats.toObject = function(includeInstance, msg) {
     gwSnr: msg.getGwSnr(),
     rxPacketsPerFrequencyMap: (f = msg.getRxPacketsPerFrequencyMap(true)) ? f.toArray() : [],
     rxPacketsPerDrMap: (f = msg.getRxPacketsPerDrMap(true)) ? f.toArray() : [],
-    errorsMap: (f = msg.getErrorsMap(true)) ? f.toArray() : []
+    errorsMap: (f = msg.getErrorsMap(true)) ? f.toArray() : [],
+    txPacketsAckMap: (f = msg.getTxPacketsAckMap(true)) ? f.toArray() : []
   };
 
   if (includeInstance) {
@@ -5003,6 +5049,12 @@ proto.api.DeviceStats.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 7:
       var value = msg.getErrorsMap();
+      reader.readMessage(value, function(message, reader) {
+        jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readUint32);
+         });
+      break;
+    case 8:
+      var value = msg.getTxPacketsAckMap();
       reader.readMessage(value, function(message, reader) {
         jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readUint32);
          });
@@ -5085,6 +5137,10 @@ proto.api.DeviceStats.prototype.serializeBinaryToWriter = function (writer) {
   f = this.getErrorsMap(true);
   if (f && f.getLength() > 0) {
     f.serializeBinary(7, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeUint32);
+  }
+  f = this.getTxPacketsAckMap(true);
+  if (f && f.getLength() > 0) {
+    f.serializeBinary(8, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeUint32);
   }
 };
 
@@ -5208,6 +5264,19 @@ proto.api.DeviceStats.prototype.getRxPacketsPerDrMap = function(opt_noLazyCreate
 proto.api.DeviceStats.prototype.getErrorsMap = function(opt_noLazyCreate) {
   return /** @type {!jspb.Map<string,number>} */ (
       jspb.Message.getMapField(this, 7, opt_noLazyCreate,
+      null));
+};
+
+
+/**
+ * map<string, uint32> tx_packets_ack = 8;
+ * @param {boolean=} opt_noLazyCreate Do not create the map if
+ * empty, instead returning `undefined`
+ * @return {!jspb.Map<string,number>}
+ */
+proto.api.DeviceStats.prototype.getTxPacketsAckMap = function(opt_noLazyCreate) {
+  return /** @type {!jspb.Map<string,number>} */ (
+      jspb.Message.getMapField(this, 8, opt_noLazyCreate,
       null));
 };
 
@@ -6986,6 +7055,219 @@ proto.api.GetDeviceStatusResponse.prototype.getStatus = function() {
 /** @param {string} value  */
 proto.api.GetDeviceStatusResponse.prototype.setStatus = function(value) {
   jspb.Message.setField(this, 2, value);
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.PacketSuccess = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.PacketSuccess, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.api.PacketSuccess.displayName = 'proto.api.PacketSuccess';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.PacketSuccess.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.PacketSuccess.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.PacketSuccess} msg The msg instance to transform.
+ * @return {!Object}
+ */
+proto.api.PacketSuccess.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    packetsuccessrate: msg.getPacketsuccessrate(),
+    lostpackets: msg.getLostpackets(),
+    totalpackets: msg.getTotalpackets()
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.PacketSuccess}
+ */
+proto.api.PacketSuccess.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.PacketSuccess;
+  return proto.api.PacketSuccess.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.PacketSuccess} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.PacketSuccess}
+ */
+proto.api.PacketSuccess.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {number} */ (reader.readFloat());
+      msg.setPacketsuccessrate(value);
+      break;
+    case 2:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setLostpackets(value);
+      break;
+    case 3:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setTotalpackets(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Class method variant: serializes the given message to binary data
+ * (in protobuf wire format), writing to the given BinaryWriter.
+ * @param {!proto.api.PacketSuccess} message
+ * @param {!jspb.BinaryWriter} writer
+ */
+proto.api.PacketSuccess.serializeBinaryToWriter = function(message, writer) {
+  message.serializeBinaryToWriter(writer);
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.PacketSuccess.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  this.serializeBinaryToWriter(writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format),
+ * writing to the given BinaryWriter.
+ * @param {!jspb.BinaryWriter} writer
+ */
+proto.api.PacketSuccess.prototype.serializeBinaryToWriter = function (writer) {
+  var f = undefined;
+  f = this.getPacketsuccessrate();
+  if (f !== 0.0) {
+    writer.writeFloat(
+      1,
+      f
+    );
+  }
+  f = this.getLostpackets();
+  if (f !== 0) {
+    writer.writeInt32(
+      2,
+      f
+    );
+  }
+  f = this.getTotalpackets();
+  if (f !== 0) {
+    writer.writeInt32(
+      3,
+      f
+    );
+  }
+};
+
+
+/**
+ * Creates a deep clone of this proto. No data is shared with the original.
+ * @return {!proto.api.PacketSuccess} The clone.
+ */
+proto.api.PacketSuccess.prototype.cloneMessage = function() {
+  return /** @type {!proto.api.PacketSuccess} */ (jspb.Message.cloneMessage(this));
+};
+
+
+/**
+ * optional float PacketSuccessRate = 1;
+ * @return {number}
+ */
+proto.api.PacketSuccess.prototype.getPacketsuccessrate = function() {
+  return /** @type {number} */ (jspb.Message.getFieldProto3(this, 1, 0));
+};
+
+
+/** @param {number} value  */
+proto.api.PacketSuccess.prototype.setPacketsuccessrate = function(value) {
+  jspb.Message.setField(this, 1, value);
+};
+
+
+/**
+ * optional int32 LostPackets = 2;
+ * @return {number}
+ */
+proto.api.PacketSuccess.prototype.getLostpackets = function() {
+  return /** @type {number} */ (jspb.Message.getFieldProto3(this, 2, 0));
+};
+
+
+/** @param {number} value  */
+proto.api.PacketSuccess.prototype.setLostpackets = function(value) {
+  jspb.Message.setField(this, 2, value);
+};
+
+
+/**
+ * optional int32 TotalPackets = 3;
+ * @return {number}
+ */
+proto.api.PacketSuccess.prototype.getTotalpackets = function() {
+  return /** @type {number} */ (jspb.Message.getFieldProto3(this, 3, 0));
+};
+
+
+/** @param {number} value  */
+proto.api.PacketSuccess.prototype.setTotalpackets = function(value) {
+  jspb.Message.setField(this, 3, value);
 };
 
 

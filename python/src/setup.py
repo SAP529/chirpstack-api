@@ -18,7 +18,7 @@ CLASSIFIERS = [
 
 setup(
     name='chirpstack-api',
-    version = "4.0.2",
+    version = "4.0.3",
     url='https://github.com/SAP529/chirpstack-api',
     author='Sagar Patel',
     author_email='sagu25patel@hotmail.com',
