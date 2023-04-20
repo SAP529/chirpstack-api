@@ -453,6 +453,14 @@ message DeviceStats {
 
     // Confirmed downlink ACK Event count.
     map<string, uint32> tx_packets_ack = 8;
+
+    // Uplink Estimated Signal Power.
+    // Estimates the real received signal strength of a desired signal considering
+    // the impact of background noise.
+    float rx_esp = 9;
+
+    // Uplink Payload Data from the device (KB).
+    uint32 payload_kb = 10;    
 }
 
 message GetDeviceStatsRequest {

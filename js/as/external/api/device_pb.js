@@ -4981,7 +4981,9 @@ proto.api.DeviceStats.toObject = function(includeInstance, msg) {
     rxPacketsPerFrequencyMap: (f = msg.getRxPacketsPerFrequencyMap(true)) ? f.toArray() : [],
     rxPacketsPerDrMap: (f = msg.getRxPacketsPerDrMap(true)) ? f.toArray() : [],
     errorsMap: (f = msg.getErrorsMap(true)) ? f.toArray() : [],
-    txPacketsAckMap: (f = msg.getTxPacketsAckMap(true)) ? f.toArray() : []
+    txPacketsAckMap: (f = msg.getTxPacketsAckMap(true)) ? f.toArray() : [],
+    rxEsp: msg.getRxEsp(),
+    payloadKb: msg.getPayloadKb()
   };
 
   if (includeInstance) {
@@ -5058,6 +5060,14 @@ proto.api.DeviceStats.deserializeBinaryFromReader = function(msg, reader) {
       reader.readMessage(value, function(message, reader) {
         jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readUint32);
          });
+      break;
+    case 9:
+      var value = /** @type {number} */ (reader.readFloat());
+      msg.setRxEsp(value);
+      break;
+    case 10:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setPayloadKb(value);
       break;
     default:
       reader.skipField();
@@ -5141,6 +5151,20 @@ proto.api.DeviceStats.prototype.serializeBinaryToWriter = function (writer) {
   f = this.getTxPacketsAckMap(true);
   if (f && f.getLength() > 0) {
     f.serializeBinary(8, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeUint32);
+  }
+  f = this.getRxEsp();
+  if (f !== 0.0) {
+    writer.writeFloat(
+      9,
+      f
+    );
+  }
+  f = this.getPayloadKb();
+  if (f !== 0) {
+    writer.writeUint32(
+      10,
+      f
+    );
   }
 };
 
@@ -5278,6 +5302,36 @@ proto.api.DeviceStats.prototype.getTxPacketsAckMap = function(opt_noLazyCreate) 
   return /** @type {!jspb.Map<string,number>} */ (
       jspb.Message.getMapField(this, 8, opt_noLazyCreate,
       null));
+};
+
+
+/**
+ * optional float rx_esp = 9;
+ * @return {number}
+ */
+proto.api.DeviceStats.prototype.getRxEsp = function() {
+  return /** @type {number} */ (jspb.Message.getFieldProto3(this, 9, 0));
+};
+
+
+/** @param {number} value  */
+proto.api.DeviceStats.prototype.setRxEsp = function(value) {
+  jspb.Message.setField(this, 9, value);
+};
+
+
+/**
+ * optional uint32 payload_kb = 10;
+ * @return {number}
+ */
+proto.api.DeviceStats.prototype.getPayloadKb = function() {
+  return /** @type {number} */ (jspb.Message.getFieldProto3(this, 10, 0));
+};
+
+
+/** @param {number} value  */
+proto.api.DeviceStats.prototype.setPayloadKb = function(value) {
+  jspb.Message.setField(this, 10, value);
 };
 
 

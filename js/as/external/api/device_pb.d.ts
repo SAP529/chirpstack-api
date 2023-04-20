@@ -666,6 +666,12 @@ export class DeviceStats extends jspb.Message {
   clearErrorsMap(): void;
   getTxPacketsAckMap(): jspb.Map<string, number>;
   clearTxPacketsAckMap(): void;
+  getRxEsp(): number;
+  setRxEsp(value: number): void;
+
+  getPayloadKb(): number;
+  setPayloadKb(value: number): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): DeviceStats.AsObject;
   static toObject(includeInstance: boolean, msg: DeviceStats): DeviceStats.AsObject;
@@ -686,6 +692,8 @@ export namespace DeviceStats {
     rxPacketsPerDrMap: Array<[number, number]>,
     errorsMap: Array<[string, number]>,
     txPacketsAckMap: Array<[string, number]>,
+    rxEsp: number,
+    payloadKb: number,
   }
 }
 

@@ -829,6 +829,16 @@
             "format": "int64"
           },
           "description": "Confirmed downlink ACK Event count."
+        },
+        "rxEsp": {
+          "type": "number",
+          "format": "float",
+          "description": "Uplink Estimated Signal Power.\nEstimates the real received signal strength of a desired signal considering\nthe impact of background noise."
+        },
+        "payloadKb": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Uplink Payload Data from the device (KB)."
         }
       }
     },
