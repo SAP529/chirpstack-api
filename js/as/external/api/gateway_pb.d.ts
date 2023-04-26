@@ -447,6 +447,12 @@ export class GatewayStats extends jspb.Message {
   clearRxFrequencyUtilizationMap(): void;
   getTxFrequencyUtilizationMap(): jspb.Map<number, number>;
   clearTxFrequencyUtilizationMap(): void;
+  getUpBytesCount(): number;
+  setUpBytesCount(value: number): void;
+
+  getDownBytesCount(): number;
+  setDownBytesCount(value: number): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GatewayStats.AsObject;
   static toObject(includeInstance: boolean, msg: GatewayStats): GatewayStats.AsObject;
@@ -473,6 +479,8 @@ export namespace GatewayStats {
     statsCount: number,
     rxFrequencyUtilizationMap: Array<[number, number]>,
     txFrequencyUtilizationMap: Array<[number, number]>,
+    upBytesCount: number,
+    downBytesCount: number,
   }
 }
 

@@ -3168,7 +3168,9 @@ proto.api.GatewayStats.toObject = function(includeInstance, msg) {
     connStatusMap: (f = msg.getConnStatusMap(true)) ? f.toArray() : [],
     statsCount: msg.getStatsCount(),
     rxFrequencyUtilizationMap: (f = msg.getRxFrequencyUtilizationMap(true)) ? f.toArray() : [],
-    txFrequencyUtilizationMap: (f = msg.getTxFrequencyUtilizationMap(true)) ? f.toArray() : []
+    txFrequencyUtilizationMap: (f = msg.getTxFrequencyUtilizationMap(true)) ? f.toArray() : [],
+    upBytesCount: msg.getUpBytesCount(),
+    downBytesCount: msg.getDownBytesCount()
   };
 
   if (includeInstance) {
@@ -3277,6 +3279,14 @@ proto.api.GatewayStats.deserializeBinaryFromReader = function(msg, reader) {
       reader.readMessage(value, function(message, reader) {
         jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readUint32, jspb.BinaryReader.prototype.readFloat);
          });
+      break;
+    case 15:
+      var value = /** @type {number} */ (reader.readFloat());
+      msg.setUpBytesCount(value);
+      break;
+    case 16:
+      var value = /** @type {number} */ (reader.readFloat());
+      msg.setDownBytesCount(value);
       break;
     default:
       reader.skipField();
@@ -3390,6 +3400,20 @@ proto.api.GatewayStats.prototype.serializeBinaryToWriter = function (writer) {
   f = this.getTxFrequencyUtilizationMap(true);
   if (f && f.getLength() > 0) {
     f.serializeBinary(14, writer, jspb.BinaryWriter.prototype.writeUint32, jspb.BinaryWriter.prototype.writeFloat);
+  }
+  f = this.getUpBytesCount();
+  if (f !== 0.0) {
+    writer.writeFloat(
+      15,
+      f
+    );
+  }
+  f = this.getDownBytesCount();
+  if (f !== 0.0) {
+    writer.writeFloat(
+      16,
+      f
+    );
   }
 };
 
@@ -3609,6 +3633,36 @@ proto.api.GatewayStats.prototype.getTxFrequencyUtilizationMap = function(opt_noL
   return /** @type {!jspb.Map<number,number>} */ (
       jspb.Message.getMapField(this, 14, opt_noLazyCreate,
       null));
+};
+
+
+/**
+ * optional float up_bytes_count = 15;
+ * @return {number}
+ */
+proto.api.GatewayStats.prototype.getUpBytesCount = function() {
+  return /** @type {number} */ (jspb.Message.getFieldProto3(this, 15, 0));
+};
+
+
+/** @param {number} value  */
+proto.api.GatewayStats.prototype.setUpBytesCount = function(value) {
+  jspb.Message.setField(this, 15, value);
+};
+
+
+/**
+ * optional float down_bytes_count = 16;
+ * @return {number}
+ */
+proto.api.GatewayStats.prototype.getDownBytesCount = function() {
+  return /** @type {number} */ (jspb.Message.getFieldProto3(this, 16, 0));
+};
+
+
+/** @param {number} value  */
+proto.api.GatewayStats.prototype.setDownBytesCount = function(value) {
+  jspb.Message.setField(this, 16, value);
 };
 
 

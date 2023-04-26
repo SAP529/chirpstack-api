@@ -1830,7 +1830,9 @@ proto.gw.GatewayStats.toObject = function(includeInstance, msg) {
     proto.gw.PerModulationCount.toObject, includeInstance),
     rxPacketsPerModulationList: jspb.Message.toObjectList(msg.getRxPacketsPerModulationList(),
     proto.gw.PerModulationCount.toObject, includeInstance),
-    txPacketsPerStatusMap: (f = msg.getTxPacketsPerStatusMap(true)) ? f.toArray() : []
+    txPacketsPerStatusMap: (f = msg.getTxPacketsPerStatusMap(true)) ? f.toArray() : [],
+    upBytesCount: msg.getUpBytesCount(),
+    downBytesCount: msg.getDownBytesCount()
   };
 
   if (includeInstance) {
@@ -1944,6 +1946,14 @@ proto.gw.GatewayStats.deserializeBinaryFromReader = function(msg, reader) {
       reader.readMessage(value, function(message, reader) {
         jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readUint32);
          });
+      break;
+    case 17:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setUpBytesCount(value);
+      break;
+    case 18:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setDownBytesCount(value);
       break;
     default:
       reader.skipField();
@@ -2086,6 +2096,20 @@ proto.gw.GatewayStats.prototype.serializeBinaryToWriter = function (writer) {
   f = this.getTxPacketsPerStatusMap(true);
   if (f && f.getLength() > 0) {
     f.serializeBinary(16, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeUint32);
+  }
+  f = this.getUpBytesCount();
+  if (f !== 0) {
+    writer.writeInt32(
+      17,
+      f
+    );
+  }
+  f = this.getDownBytesCount();
+  if (f !== 0) {
+    writer.writeInt32(
+      18,
+      f
+    );
   }
 };
 
@@ -2422,6 +2446,36 @@ proto.gw.GatewayStats.prototype.getTxPacketsPerStatusMap = function(opt_noLazyCr
   return /** @type {!jspb.Map<string,number>} */ (
       jspb.Message.getMapField(this, 16, opt_noLazyCreate,
       null));
+};
+
+
+/**
+ * optional int32 up_bytes_count = 17;
+ * @return {number}
+ */
+proto.gw.GatewayStats.prototype.getUpBytesCount = function() {
+  return /** @type {number} */ (jspb.Message.getFieldProto3(this, 17, 0));
+};
+
+
+/** @param {number} value  */
+proto.gw.GatewayStats.prototype.setUpBytesCount = function(value) {
+  jspb.Message.setField(this, 17, value);
+};
+
+
+/**
+ * optional int32 down_bytes_count = 18;
+ * @return {number}
+ */
+proto.gw.GatewayStats.prototype.getDownBytesCount = function() {
+  return /** @type {number} */ (jspb.Message.getFieldProto3(this, 18, 0));
+};
+
+
+/** @param {number} value  */
+proto.gw.GatewayStats.prototype.setDownBytesCount = function(value) {
+  jspb.Message.setField(this, 18, value);
 };
 
 

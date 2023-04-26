@@ -615,6 +615,16 @@
             "format": "float"
           },
           "description": "Tx packets (Transmitted) frequency utilization."
+        },
+        "upBytesCount": {
+          "type": "number",
+          "format": "float",
+          "title": "Uplink Packet bytes count"
+        },
+        "downBytesCount": {
+          "type": "number",
+          "format": "float",
+          "title": "Downlink Packet bytes count"
         }
       }
     },

@@ -2320,7 +2320,9 @@ proto.as.HandleGatewayStatsRequest.toObject = function(includeInstance, msg) {
     rxPacketsPerFrequencyMap: (f = msg.getRxPacketsPerFrequencyMap(true)) ? f.toArray() : [],
     txPacketsPerDrMap: (f = msg.getTxPacketsPerDrMap(true)) ? f.toArray() : [],
     rxPacketsPerDrMap: (f = msg.getRxPacketsPerDrMap(true)) ? f.toArray() : [],
-    txPacketsPerStatusMap: (f = msg.getTxPacketsPerStatusMap(true)) ? f.toArray() : []
+    txPacketsPerStatusMap: (f = msg.getTxPacketsPerStatusMap(true)) ? f.toArray() : [],
+    upBytesCount: msg.getUpBytesCount(),
+    downBytesCount: msg.getDownBytesCount()
   };
 
   if (includeInstance) {
@@ -2426,6 +2428,14 @@ proto.as.HandleGatewayStatsRequest.deserializeBinaryFromReader = function(msg, r
       reader.readMessage(value, function(message, reader) {
         jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readUint32);
          });
+      break;
+    case 15:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setUpBytesCount(value);
+      break;
+    case 16:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setDownBytesCount(value);
       break;
     default:
       reader.skipField();
@@ -2546,6 +2556,20 @@ proto.as.HandleGatewayStatsRequest.prototype.serializeBinaryToWriter = function 
   f = this.getTxPacketsPerStatusMap(true);
   if (f && f.getLength() > 0) {
     f.serializeBinary(14, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeUint32);
+  }
+  f = this.getUpBytesCount();
+  if (f !== 0) {
+    writer.writeInt32(
+      15,
+      f
+    );
+  }
+  f = this.getDownBytesCount();
+  if (f !== 0) {
+    writer.writeInt32(
+      16,
+      f
+    );
   }
 };
 
@@ -2832,6 +2856,36 @@ proto.as.HandleGatewayStatsRequest.prototype.getTxPacketsPerStatusMap = function
   return /** @type {!jspb.Map<string,number>} */ (
       jspb.Message.getMapField(this, 14, opt_noLazyCreate,
       null));
+};
+
+
+/**
+ * optional int32 up_bytes_count = 15;
+ * @return {number}
+ */
+proto.as.HandleGatewayStatsRequest.prototype.getUpBytesCount = function() {
+  return /** @type {number} */ (jspb.Message.getFieldProto3(this, 15, 0));
+};
+
+
+/** @param {number} value  */
+proto.as.HandleGatewayStatsRequest.prototype.setUpBytesCount = function(value) {
+  jspb.Message.setField(this, 15, value);
+};
+
+
+/**
+ * optional int32 down_bytes_count = 16;
+ * @return {number}
+ */
+proto.as.HandleGatewayStatsRequest.prototype.getDownBytesCount = function() {
+  return /** @type {number} */ (jspb.Message.getFieldProto3(this, 16, 0));
+};
+
+
+/** @param {number} value  */
+proto.as.HandleGatewayStatsRequest.prototype.setDownBytesCount = function(value) {
+  jspb.Message.setField(this, 16, value);
 };
 
 

@@ -248,6 +248,12 @@ message HandleGatewayStatsRequest {
 
     // Tx packets per status.
     map<string, uint32> tx_packets_per_status = 14;
+
+    // Uplink Packet bytes count
+	int32 up_bytes_count = 15;
+
+	// Downlink Packet bytes count
+	int32 down_bytes_count = 16;
 }
 
 message HandleTxAckRequest {

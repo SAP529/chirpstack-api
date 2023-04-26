@@ -313,6 +313,12 @@ message GatewayStats {
 
 	// Tx packets (Transmitted) frequency utilization.
     map<uint32, float> tx_frequency_utilization = 14;
+
+	// Uplink Packet bytes count
+	float up_bytes_count = 15;
+
+	// Downlink Packet bytes count
+	float down_bytes_count = 16;
 }
 
 message GetGatewayStatsRequest {
