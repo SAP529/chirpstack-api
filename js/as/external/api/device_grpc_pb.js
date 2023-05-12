@@ -108,6 +108,28 @@ function deserialize_api_GetDeviceActivationResponse(buffer_arg) {
   return as_external_api_device_pb.GetDeviceActivationResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_GetDeviceDataRequest(arg) {
+  if (!(arg instanceof as_external_api_device_pb.GetDeviceDataRequest)) {
+    throw new Error('Expected argument of type api.GetDeviceDataRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetDeviceDataRequest(buffer_arg) {
+  return as_external_api_device_pb.GetDeviceDataRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetDeviceDataResponse(arg) {
+  if (!(arg instanceof as_external_api_device_pb.GetDeviceDataResponse)) {
+    throw new Error('Expected argument of type api.GetDeviceDataResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetDeviceDataResponse(buffer_arg) {
+  return as_external_api_device_pb.GetDeviceDataResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_GetDeviceKeysRequest(arg) {
   if (!(arg instanceof as_external_api_device_pb.GetDeviceKeysRequest)) {
     throw new Error('Expected argument of type api.GetDeviceKeysRequest');
@@ -541,6 +563,18 @@ getStatus: {
     requestDeserialize: deserialize_api_GetDeviceStatusRequest,
     responseSerialize: serialize_api_GetDeviceStatusResponse,
     responseDeserialize: deserialize_api_GetDeviceStatusResponse,
+  },
+  // GetDeviceData returns the device uplink data matching the given DevEUI.
+getDeviceData: {
+    path: '/api.DeviceService/GetDeviceData',
+    requestStream: false,
+    responseStream: false,
+    requestType: as_external_api_device_pb.GetDeviceDataRequest,
+    responseType: as_external_api_device_pb.GetDeviceDataResponse,
+    requestSerialize: serialize_api_GetDeviceDataRequest,
+    requestDeserialize: deserialize_api_GetDeviceDataRequest,
+    responseSerialize: serialize_api_GetDeviceDataResponse,
+    responseDeserialize: deserialize_api_GetDeviceDataResponse,
   },
 };
 

@@ -256,6 +256,48 @@
         ]
       }
     },
+    "/api/devices/{dev_eui}/events/up": {
+      "get": {
+        "summary": "GetDeviceData returns the device uplink data matching the given DevEUI.",
+        "operationId": "GetDeviceData",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetDeviceDataResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "dev_eui",
+            "description": "Device EUI (HEX encoded).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "description": "Max number of devices to return in the result-set.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "offset",
+            "description": "Offset in the result-set (for pagination).",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "DeviceService"
+        ]
+      }
+    },
     "/api/devices/{dev_eui}/frames": {
       "get": {
         "summary": "StreamFrameLogs streams the uplink and downlink frame-logs for the given DevEUI.\n  * These are the raw LoRaWAN frames and this endpoint is intended for debugging only.\n  * This endpoint does not work from a web-browser.",
@@ -694,6 +736,63 @@
         }
       }
     },
+    "apiDeviceEventsListItem": {
+      "type": "object",
+      "properties": {
+        "devEUI": {
+          "type": "string",
+          "description": "DevEUI EUI (8 bytes)."
+        },
+        "deviceName": {
+          "type": "string",
+          "description": "Name of the device (must be unique)."
+        },
+        "lastSeenAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last Seen At."
+        },
+        "fCnt": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Frame-counter (if applicable) related to the error."
+        },
+        "rssi": {
+          "type": "integer",
+          "format": "int32",
+          "description": "RSSI."
+        },
+        "loRaSNR": {
+          "type": "number",
+          "format": "double",
+          "description": "LoRa SNR."
+        },
+        "gatewayID": {
+          "type": "string",
+          "description": "Gateway ID."
+        },
+        "frequency": {
+          "type": "integer",
+          "format": "int64",
+          "description": "TX frequency (in Hz)."
+        },
+        "datarate": {
+          "type": "integer",
+          "format": "int64",
+          "description": "FSK datarate (bits / sec)."
+        },
+        "data": {
+          "type": "string",
+          "format": "byte",
+          "description": "Received data (encrypted)."
+        },
+        "confirmedUplink": {
+          "type": "boolean",
+          "format": "boolean",
+          "description": "Uplink was of type confirmed."
+        }
+      }
+    },
     "apiDeviceKeys": {
       "type": "object",
       "properties": {
@@ -870,6 +969,23 @@
         "deviceActivation": {
           "$ref": "#/definitions/apiDeviceActivation",
           "description": "Device-activation object."
+        }
+      }
+    },
+    "apiGetDeviceDataResponse": {
+      "type": "object",
+      "properties": {
+        "totalCount": {
+          "type": "string",
+          "format": "int64",
+          "description": "Total number of devices available within the result-set."
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiDeviceEventsListItem"
+          },
+          "description": "Devices uplink events within this result-set."
         }
       }
     },

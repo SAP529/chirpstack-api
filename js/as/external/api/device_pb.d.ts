@@ -956,3 +956,121 @@ export namespace PacketSuccess {
   }
 }
 
+export class GetDeviceDataRequest extends jspb.Message {
+  getDevEui(): string;
+  setDevEui(value: string): void;
+
+  getLimit(): number;
+  setLimit(value: number): void;
+
+  getOffset(): number;
+  setOffset(value: number): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetDeviceDataRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetDeviceDataRequest): GetDeviceDataRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: GetDeviceDataRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetDeviceDataRequest;
+  static deserializeBinaryFromReader(message: GetDeviceDataRequest, reader: jspb.BinaryReader): GetDeviceDataRequest;
+}
+
+export namespace GetDeviceDataRequest {
+  export type AsObject = {
+    devEui: string,
+    limit: number,
+    offset: number,
+  }
+}
+
+export class GetDeviceDataResponse extends jspb.Message {
+  getTotalCount(): number;
+  setTotalCount(value: number): void;
+
+  clearResultList(): void;
+  getResultList(): Array<DeviceEventsListItem>;
+  setResultList(value: Array<DeviceEventsListItem>): void;
+  addResult(value?: DeviceEventsListItem, index?: number): DeviceEventsListItem;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetDeviceDataResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetDeviceDataResponse): GetDeviceDataResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: GetDeviceDataResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetDeviceDataResponse;
+  static deserializeBinaryFromReader(message: GetDeviceDataResponse, reader: jspb.BinaryReader): GetDeviceDataResponse;
+}
+
+export namespace GetDeviceDataResponse {
+  export type AsObject = {
+    totalCount: number,
+    resultList: Array<DeviceEventsListItem.AsObject>,
+  }
+}
+
+export class DeviceEventsListItem extends jspb.Message {
+  getDevEui(): string;
+  setDevEui(value: string): void;
+
+  getDeviceName(): string;
+  setDeviceName(value: string): void;
+
+  hasLastSeenAt(): boolean;
+  clearLastSeenAt(): void;
+  getLastSeenAt(): google_protobuf_timestamp_pb.Timestamp | undefined;
+  setLastSeenAt(value?: google_protobuf_timestamp_pb.Timestamp): void;
+
+  getFCnt(): number;
+  setFCnt(value: number): void;
+
+  getRssi(): number;
+  setRssi(value: number): void;
+
+  getLoraSnr(): number;
+  setLoraSnr(value: number): void;
+
+  getGatewayId(): string;
+  setGatewayId(value: string): void;
+
+  getFrequency(): number;
+  setFrequency(value: number): void;
+
+  getDatarate(): number;
+  setDatarate(value: number): void;
+
+  getData(): Uint8Array | string;
+  getData_asU8(): Uint8Array;
+  getData_asB64(): string;
+  setData(value: Uint8Array | string): void;
+
+  getConfirmedUplink(): boolean;
+  setConfirmedUplink(value: boolean): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): DeviceEventsListItem.AsObject;
+  static toObject(includeInstance: boolean, msg: DeviceEventsListItem): DeviceEventsListItem.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: DeviceEventsListItem, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): DeviceEventsListItem;
+  static deserializeBinaryFromReader(message: DeviceEventsListItem, reader: jspb.BinaryReader): DeviceEventsListItem;
+}
+
+export namespace DeviceEventsListItem {
+  export type AsObject = {
+    devEui: string,
+    deviceName: string,
+    lastSeenAt?: google_protobuf_timestamp_pb.Timestamp.AsObject,
+    fCnt: number,
+    rssi: number,
+    loraSnr: number,
+    gatewayId: string,
+    frequency: number,
+    datarate: number,
+    data: Uint8Array | string,
+    confirmedUplink: boolean,
+  }
+}
+

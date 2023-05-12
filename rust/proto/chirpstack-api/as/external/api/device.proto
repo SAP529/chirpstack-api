@@ -152,6 +152,13 @@ service DeviceService {
             get: "/api/devices/{dev_eui}/status"
         };
     }
+
+    // GetDeviceData returns the device uplink data matching the given DevEUI.
+    rpc GetDeviceData(GetDeviceDataRequest) returns (GetDeviceDataResponse) {
+        option (google.api.http) = {
+            get: "/api/devices/{dev_eui}/events/up"
+        };
+    }
 }
 
 message Device {
@@ -549,4 +556,58 @@ message PacketSuccess {
     // Configurable amount of frame counter-history of uplink events (per device)
     // A configuration setting is available in the Application Server configuration file and its global settings for all devices.
     int32 TotalPackets = 3 [json_name = "totalPackets"];
+}
+
+message GetDeviceDataRequest {
+    // Device EUI (HEX encoded).
+    string dev_eui = 1 [json_name = "devEUI"];
+
+    // Max number of devices to return in the result-set.
+    int64 limit = 2;
+
+    // Offset in the result-set (for pagination).
+    int64 offset = 3;
+}
+
+message GetDeviceDataResponse {
+    // Total number of devices available within the result-set.
+    int64 total_count = 1;
+
+    // Devices uplink events within this result-set.
+    repeated DeviceEventsListItem result = 2;
+}
+
+message DeviceEventsListItem {
+    // DevEUI EUI (8 bytes).
+   string dev_eui = 1 [json_name = "devEUI"];
+
+    // Name of the device (must be unique).
+	string device_name = 2;
+
+    // Last Seen At.
+    google.protobuf.Timestamp last_seen_at = 3;
+
+     // Frame-counter (if applicable) related to the error.
+    uint32 f_cnt = 4;
+
+     // RSSI.
+    int32 rssi = 5;
+
+    // LoRa SNR.
+    double lora_snr = 6 [json_name = "loRaSNR"];
+
+     // Gateway ID.
+    string gateway_id = 7 [json_name = "gatewayID"];
+
+    // TX frequency (in Hz).
+    uint32 frequency = 8;
+
+    // FSK datarate (bits / sec).
+    uint32 datarate = 9;
+
+    // Received data (encrypted).
+    bytes data = 10;
+
+    // Uplink was of type confirmed.
+    bool confirmed_uplink = 11;
 }
